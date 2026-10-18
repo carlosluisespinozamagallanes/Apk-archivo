@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JE - Registro de Servicios</title>
+    <style>
+        :root {
+            --primary-blue: #004b93;
+            --primary-red: #d32f2f;
+            --bg-gray: #f4f6f9;
+            --card-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-gray);
+            margin: 0;
+            padding: 15px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), #00264d);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .card {
+            background: var(--card-white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: var(--primary-blue);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #003366;
+        }
+
+        .btn-success {
+            background-color: #2e7d32;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .total-box {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .total-box span {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .service-item {
+            border-left: 4px solid var(--primary-red);
+            background: #fafafa;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .service-item strong {
+            color: var(--primary-blue);
+        }
+
+        .service-item .val {
+            font-weight: bold;
+            color: var(--primary-red);
+            font-size: 16px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>JE TÉCNICO</h1>
+        <p>Reporte de Servicios y Control Financiero</p>
+    </div>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="card">
+        <h2>Registrar Nuevo Servicio</h2>
+        <form id="serviceForm">
+            <div class="form-group">
+                <label for="technician">Nombre del Técnico:</label>
+                <input type="text" id="technician" placeholder="Ej: Carlos" required>
+            </div>
+
+            <div class="form-group">
+                <label for="client">Cliente / Dirección:</label>
+                <input type="text" id="client" placeholder="Ej: Calle Principal #123" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Categoría:</label>
+                <select id="category" required>
+                    <option value="">Seleccione una categoría</option>
+                    <option value="Aire Acondicionado">Aire Acondicionado</option>
+                    <option value="Refrigeración Comercial">Refrigeración Comercial</option>
+                    <option value="Electricidad Residencial">Electricidad Residencial</option>
+                    <option value="Electricidad Comercial">Electricidad Comercial</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción del Trabajo:</label>
+                <textarea id="description" rows="2" placeholder="Detalle de las reparaciones o instalación realizada..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="value">Valor del Servicio (R$ / $):</label>
+                <input type="number" id="value" step="0.01" placeholder="0.00" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Servicio</button>
+        </form>
+    </div>
+
+    <!-- RESUMEN Y HISTORIAL -->
+    <div class="card">
+        <h2>Resumen de Servicios</h2>
+        <div class="total-box">
+            Total Acumulado:
+            <span id="totalAmount">R$ 0,00</span>
+        </div>
+
+        <div id="serviceList">
+            <!-- Aquí se cargarán los servicios dinámicamente -->
+        </div>
+
+        <button id="exportCsvBtn" class="btn btn-success">Exportar Reporte a Excel (CSV)</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('serviceForm');
+        const serviceList = document.getElementById('serviceList');
+        const totalAmountDisplay = document.getElementById('totalAmount');
+        const exportBtn = document.getElementById('exportCsvBtn');
+
+        let services = JSON.parse(localStorage.getItem('je_services')) || [];
+
+        function saveAndRender() {
+            localStorage.setItem('je_services', JSON.stringify(services));
+            renderServices();
+        }
+
+        function renderServices() {
+            serviceList.innerHTML = '';
+            let total = 0;
+
+            if (services.length === 0) {
+                serviceList.innerHTML = '<p style="text-align:center; color:#777;">No hay servicios registrados aún.</p>';
+            } else {
+                services.forEach((service, index) => {
+                    total += parseFloat(service.value);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'service-item';
+                    item.innerHTML = `
+                        <button class="delete-btn" onclick="deleteService(${index})">X</button>
+                        <strong>${service.category}</strong> - ${service.date}<br>
+                        <small><b>Técnico:</b> ${service.technician} | <b>Cliente:</b> ${service.client}</small><br>
+                        <span>${service.description}</span><br>
+                        <div class="val">R$ ${parseFloat(service.value).toFixed(2)}</div>
+                    `;
+                    serviceList.appendChild(item);
+                });
+            }
+
+            totalAmountDisplay.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newService = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}),
+                technician: document.getElementById('technician').value,
+                client: document.getElementById('client').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                value: parseFloat(document.getElementById('value').value)
+            };
+
+            services.unshift(newService);
+            saveAndRender();
+            form.reset();
+        });
+
+        window.deleteService = function(index) {
+            if (confirm('¿Deseas eliminar este registro de servicio?')) {
+                services.splice(index, 1);
+                saveAndRender();
+            }
+        };
+
+        exportBtn.addEventListener('click', () => {
+            if (services.length === 0) {
+                alert('No hay datos para exportar.');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,Fecha,Tecnico,Cliente,Categoria,Descripcion,Valor\n";
+            services.forEach(s => {
+                csvContent += `"${s.date}","${s.technician}","${s.client}","${s.category}","${s.description}","${s.value}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Reporte_Servicios_JE_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        renderServices();
+    });
+</script>
+
+</body>
+</html>
